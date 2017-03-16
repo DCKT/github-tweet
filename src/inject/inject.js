@@ -9,9 +9,10 @@ chrome.extension.sendMessage({}, function (response) {
       }
 
       const repoName = encodeURIComponent(document.querySelector('[itemprop="name"]').innerText)
-      const repoDescription = encodeURIComponent(document.querySelector('[itemprop="about"]').innerText)
+      const repoDescription = document.querySelector('[itemprop="about"]')
+      const repoDescriptionText = repoDescription && encodeURIComponent(repoDescription.innerText)
       const repoUrl = encodeURIComponent(location.href)
-      const tweetText = `${repoName} - ${repoDescription} ${repoUrl}`
+      const tweetText = `${repoName} - ${repoDescription ? repoDescriptionText : ''} ${repoUrl}`
       const pageHeadActions = document.querySelector('.pagehead-actions')
       const tweetTag = document.createElement('li')
 
